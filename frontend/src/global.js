@@ -9,12 +9,13 @@ export default StyleSheet.create({
       width: "100%",
 	},
   header:{
-    flex:0.3,    
+    flex:1,    
     flexBasis: 100,
     width: "100%",
     alignItems: "center",
   },
   	form: {
+      flex:1,
       justifyContent: "center",
       textAlign: "center",
   		width: "100%",
@@ -23,19 +24,18 @@ export default StyleSheet.create({
       
   	},
   	inputForm: {
-  		marginBottom: 10,
-      
+      flex:1,
+      maxHeight:200,
   	},
   	input: {
-      borderWidth: 1,
-      marginTop: 10,
-      paddingLeft: 40,
-      paddingTop: 10,
-      paddingBottom: 10
+      flex:1,
+      height: "100%",
+      paddingLeft: 0,
+      minHeight: 100
     },
     enterBtn: {
       backgroundColor: "blue",
-      padding: 15,
+      padding: 16,
       marginBottom: 2,
     },
     enterBtnText: {
