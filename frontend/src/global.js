@@ -35,7 +35,7 @@ export default StyleSheet.create({
     },
     enterBtn: {
       backgroundColor: "blue",
-      padding: 16,
+      padding: 12,
       marginBottom: 2,
     },
     enterBtnText: {
