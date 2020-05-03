@@ -3,9 +3,7 @@ import {StyleSheet} from "react-native";
 export default StyleSheet.create({
 	container: {
 	    flex: 1,
-	    backgroundColor: '#fff',
-	    alignItems: 'center',
-	    justifyContent: 'center',
+	    backgroundColor: '#FFFFFF',
       width: "100%",
 	},
   header:{
@@ -27,6 +25,16 @@ export default StyleSheet.create({
       flex:1,
       maxHeight:200,
   	},
+    inputSelection: {
+      flex:1,
+      flexDirection:"row",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+      borderColor: "#C4C4C4",
+      borderWidth: 1,
+      borderRadius: 3
+    },
   	input: {
       flex:1,
       height: "100%",
@@ -34,9 +42,10 @@ export default StyleSheet.create({
       minHeight: 100
     },
     enterBtn: {
-      backgroundColor: "blue",
+      backgroundColor: "#1D66C4",
       padding: 12,
       marginBottom: 2,
+      borderRadius: 3
     },
     enterBtnText: {
       color: "white",

@@ -7,7 +7,6 @@ import localStyles from "./styles.js";
 import styles from "../../global.js";
 
 export default function Login() {
-
   return (
     <View style={styles.container}>
         <Header/>  
@@ -16,7 +15,6 @@ export default function Login() {
     </View>
   );
 }
-
 
 const Header = () => {
   return(
@@ -30,7 +28,6 @@ const Header = () => {
     </View>
   )
 }
-
 
 function Main(){
   const [text,setText] = useState("");
@@ -46,8 +43,8 @@ function Main(){
         <KeyboardAvoidingView behavior="padding" style={styles.form}>
           
           <View style={styles.inputForm}>
-            <View behavior="padding" style={{flex:1,flexDirection:"row", justifyContent: "center", alignItems: "center",width: "100%", borderWidth: 3, minHeight: 50}}>
-              <Zocial name="email" size={18} style={{padding:10}}/>
+            <View behavior="padding" style={[styles.inputSelection, {minHeight: 50}]}>
+              <Zocial name="email" size={18} color="#C4C4C4" style={{padding:10}}/>
               <TextInput
                 style={styles.input}
                 placeholder="Email"
@@ -55,8 +52,8 @@ function Main(){
                 default={text}
               />
             </View>
-            <View style={{flex:1,flexDirection:"row", justifyContent: "center", alignItems: "center",width: "100%", borderWidth: 3, marginTop: 10, minHeight: 50, marginBottom: 10}}>
-              <SimpleLineIcons name="lock" size={18} style={{padding:10}}/>
+            <View style={[styles.inputSelection,{marginTop: 10, minHeight: 50, marginBottom: 10}]}>
+              <SimpleLineIcons name="lock" size={18} color="#C4C4C4" style={{padding:10}}/>
               <TextInput
                 style={styles.input}
                 placeholder="Senha"
