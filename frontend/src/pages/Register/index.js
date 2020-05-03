@@ -6,7 +6,7 @@ import localStyles from "./styles.js";
 import styles from "../../global.js";
 
 
-export default function App() {
+const Register = () => {
   return (
     <View style={styles.container}>
     	<Header/>
@@ -33,11 +33,7 @@ function Main(){
 	 const [password,setPassword] = useState("");
 	 const [phone,setPhone] = useState("");
 
-	  const navigation = useNavigation();
-
-	  function goToLogin(){
-	  	navigation.goBack()
-	  }
+	  const {goBack} = useNavigation();
 
 	return(
 		<View style={{flex:10,width: "100%"}}>
@@ -99,7 +95,7 @@ function Main(){
 		      		</Text>
 		      	</TouchableOpacity>
 		      	
-		      	<TouchableOpacity style={styles.enterBtn} onPress={goToLogin}>
+		      	<TouchableOpacity style={styles.enterBtn} onPress={goBack}>
 		      		<Text style={styles.enterBtnText}>
 		      			Já tenho conta
 		      		</Text>
@@ -110,3 +106,5 @@ function Main(){
       </View>
 	)
 }
+
+export default Register;

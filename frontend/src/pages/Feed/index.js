@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 import styles from "./styles.js";
 import globalStyles from "../../global.js"
 
-export default function Feed(){
+const Feed = () => {
 	return(
 		<View style={globalStyles.container}>
 			<Header/>
@@ -20,8 +20,8 @@ function Main(){
 		<View style={styles.main}>
 			<View style={styles.publishForm}>
 				<View style={styles.inputSelection}>
-					<View style={{flex:1}}>
-						<Image source={require("../Home/images/13.jpg")} style={{width: "100%",height: "100%"}}/>
+					<View style={{flex:0.9,marginRight: 20}}>
+						<Image source={require("../Home/images/13.jpg")} style={{width: "100%",height: "100%",borderRadius: 100}}/>
 					</View>
 					<View style={{flex:4, borderWidth:1,borderColor: "#C4C4C4"}}>
 						<TextInput
@@ -41,7 +41,9 @@ function Main(){
 			</View>
 
 			<View style={styles.followingPublications}>
-				<Text style={{flex:1, paddingLeft: 10}}>Publicações de quem você segue</Text>
+				<View style={{flex:1,justifyContent: "center"}}>
+					<Text style={{paddingLeft: 10}}>Publicações de quem você segue</Text>
+				</View>
 				<View style={styles.publications}>
 					<FlatList
 						data={[1,2,3]}
@@ -49,8 +51,8 @@ function Main(){
 						renderItem={({item}) => (
 							<View style={styles.personPublication}>
 								<View style={{flex:1,flexDirection: "row",height: 30}}>
-									<View style={{flex:1}}>
-										<Image source={require("../Home/images/13.jpg")} style={{width: "100%", height: "100%"}} />
+									<View style={{flex:0.5}}>
+										<Image source={require("../Home/images/13.jpg")} style={{width: "100%", height: "100%", borderRadius: 100}} />
 									</View>
 									<Text style={{flex:4, paddingLeft:10}}>Alex 12:12 - 12/12/2012</Text>
 								</View>
@@ -65,3 +67,6 @@ function Main(){
 		</View>
 	)
 }
+
+
+export default Feed;

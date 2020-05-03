@@ -7,7 +7,7 @@ import globalStyles from "../../global.js"
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
-export default function Home(){
+const Home = () => {
 	return (
 		<View style={[globalStyles.container, styles.container]}>
 			<Header/>
@@ -85,3 +85,5 @@ function Main(){
 		</View>
 	)
 }
+
+export default Home;

@@ -6,7 +6,7 @@ import { Zocial, SimpleLineIcons } from '@expo/vector-icons';
 import localStyles from "./styles.js";
 import styles from "../../global.js";
 
-export default function Login() {
+const Login = () => {
   return (
     <View style={styles.container}>
         <Header/>  
@@ -32,11 +32,7 @@ const Header = () => {
 function Main(){
   const [text,setText] = useState("");
 
-  const navigation = useNavigation();
-
-  function goToHome(){
-    navigation.navigate("Home")
-  }
+  const {navigate} = useNavigation();
 
   return(
     <View style={localStyles.main}>
@@ -61,7 +57,7 @@ function Main(){
                 default={text}
               />
             </View>
-            <TouchableOpacity style={styles.enterBtn} onPress={goToHome}>
+            <TouchableOpacity style={styles.enterBtn} onPress={() => navigate("Drawer")}>
               <Text style={styles.enterBtnText}>ENTRAR</Text>
             </TouchableOpacity>
           </View>
@@ -71,11 +67,7 @@ function Main(){
 }
 
 const Footer = () => {
-  const navigation = useNavigation(); 
-
-  function goToRegister(){
-    navigation.navigate("Register");
-  }
+  const {navigate} = useNavigation(); 
 
   return(
     <View style={localStyles.footer}>
@@ -83,10 +75,12 @@ const Footer = () => {
         <TouchableOpacity style={{flex:1,marginBottom: 10,justifyContent: "center"}}>
           <Text style={{}}>Esqueci minha senha</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={goToRegister} style={{flex:1}}>
+        <TouchableOpacity onPress={() => navigate("Register")} style={{flex:1}}>
           <Text style={{}}>Cadastrar</Text>
         </TouchableOpacity>
       </HideWithKeyboard>
     </View>
   )
 }
+
+export default Login;
