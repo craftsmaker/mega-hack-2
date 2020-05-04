@@ -1,12 +1,11 @@
-import {StyleSheet} from "react-native";
+import {StyleSheet,Dimensions} from "react-native";
 
 export default StyleSheet.create({
 	header:{
+		width: "100%",
+		height: "8%",
+		marginTop: 15,
 		flexDirection: "row",
-		marginTop: 25,
-		height: 40,
-		borderColor: "#C4C4C4",
-		borderBottomWidth: 1,
 	},
 	btn:{
 		flex:1,

@@ -17,8 +17,14 @@ const Community = () => {
 }
 
 function Main(){
+	function handlePublish(){
+		alert("Nenhuma funcionalidade até o momento :(")
+	}
+	function handleSelectTopic(){
+		alert("Nenhuma funcionalidade até o momento :(")
+	}
 	return(
-		<View style={styles.main}>
+		<View style={globalStyles.main}>
 			<View style={styles.publishForm}>
 				<View style={styles.publishInput}>
 					<TextInput
@@ -28,10 +34,10 @@ function Main(){
 					/>
 				</View>
 				<View style={styles.publishButtons}>
-					<TouchableOpacity style={{flex:1,justifyContent: "center",backgroundColor: "#C4C4C4",borderRadius: 3,marginBottom:2,marginRight: 60}}>
+					<TouchableOpacity style={{flex:1,justifyContent: "center",backgroundColor: "#C4C4C4",borderRadius: 3,marginBottom:2,marginRight: 60}} onPress={handleSelectTopic}>
 						<Text style={{textAlign: "center"}}>Selecionar o tópico</Text>
 					</TouchableOpacity>
-					<TouchableOpacity style={[globalStyles.enterBtn,{flex:0.6, justifyContent: "center"}]}>
+					<TouchableOpacity style={[globalStyles.enterBtn,{flex:0.6, justifyContent: "center"}]} onPress={handlePublish}>
 						<Text style={globalStyles.enterBtnText}>PUBLICAR</Text>
 					</TouchableOpacity>
 				</View>

@@ -1,9 +1,6 @@
 import {StyleSheet} from "react-native";
 
 export default StyleSheet.create({
-	main:{
-		flex:1,
-	},
 	publishForm:{
 		flex:0.1,
 		padding: 10,

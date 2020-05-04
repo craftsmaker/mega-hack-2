@@ -3,14 +3,14 @@ import {StyleSheet} from "react-native";
 
 export default StyleSheet.create({
 	footer:{
-		height: 60,
-		width: "100%",
+		height: "10%",
+		flexDirection: "row",
 		borderColor: "#C4C4C4",
 		borderTopWidth: 1
 	},
 	buttons:{
 		flex:1,
-		flexDirection: "row"
+		
 	},
 	button:{
 		flex:1,

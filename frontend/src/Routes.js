@@ -20,19 +20,19 @@ const Routes = () => {
 			<Stack.Navigator headerMode="none">
 				<Stack.Screen name="Login" component={Login}/>
 				<Stack.Screen name="Register" component={Register}/>
-				<Stack.Screen name="Drawer" component={D}/>
+				<Stack.Screen name="Drawer" component={DrawerNavigator}/>
 			</Stack.Navigator>
 		</NavigationContainer>
 	)
 }
 
-function D(){
+function DrawerNavigator(){
 		return(
 			<Drawer.Navigator>
-				<Drawer.Screen name="Home" component={Home}/>
-				<Drawer.Screen name="Community" component={Community}/>
-				<Drawer.Screen name="Feed" component={Feed}/>
-				<Drawer.Screen name="Profile" component={Profile}/>
+				<Drawer.Screen name="Home" component={Home} options={{title: "Inicio"}}/>
+				<Drawer.Screen name="Community" component={Community} options={{title: "Comunidade"}}/>
+				<Drawer.Screen name="Feed" component={Feed} options={{title: "Feed"}}/>
+				<Drawer.Screen name="Profile" component={Profile} options={{title: "Meu perfil"}}/>
 			</Drawer.Navigator>
 		)	
 	}

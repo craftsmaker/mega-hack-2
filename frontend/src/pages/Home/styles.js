@@ -38,16 +38,16 @@ export default StyleSheet.create({
 	topic:{
 		width: 120,
 		justifyContent: "center",
-		borderColor: "red",
-		borderLeftWidth: 4,
+		paddingLeft: 6
 	},
 	imgBackground:{
-		flex:1, 
+		flex:1,
 		justifyContent: "center",
 		alignItems: "center",
-		width: "100%",
 		height: "100%",
-		paddingRight:5
+		borderColor: "blue",
+		borderLeftWidth: 5,
+		borderRadius: 5
 	},
 	questions: {
 		flex: 0.8,

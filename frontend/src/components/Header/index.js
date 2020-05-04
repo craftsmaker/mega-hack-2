@@ -1,12 +1,10 @@
 import React from "react";
-import {View,Image,TouchableOpacity} from "react-native";
+import {View,Image,Text,TouchableOpacity} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import {Feather} from "@expo/vector-icons";
 import styles from "./styles.js"
 
-
-
-const Header =({children}) => {
+const Header = (props) => {
 	const {openDrawer} = useNavigation();
 	return(
 		<View style={styles.header}>
@@ -20,11 +18,9 @@ const Header =({children}) => {
 				<Image source={require("../../../assets/splash.png")} style={{width: 24, height:24}} />
 				<Image source={require("../../../assets/sebrae.png")} style={{width: 38, height:24}} />
 			</View>
-			{children}
+			
 		</View>
-		
 	)
 }
-
 
 export default Header;

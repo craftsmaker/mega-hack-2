@@ -14,6 +14,9 @@ export default StyleSheet.create({
 	},
 	main: {
 		flex: 2,
-		width: "100%"
-	}
+		width: "100%",
+		paddingLeft: 20,
+		paddingRight: 20
+	},
+	
 })
