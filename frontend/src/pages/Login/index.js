@@ -37,11 +37,10 @@ function Main(){
   const {navigate} = useNavigation();
 
   async function handleLogin(){
-    console.log(password)
-    if (login === "" || password === ""){
-      alert("Por favor coloque um login e/ou uma senha")
-      return undefined
-    }
+    // if (login === "" || password === ""){
+    //   alert("Por favor coloque um login e/ou uma senha")
+    //   return undefined
+    // }
 
     const haveCorrectPasswordAndLogin = true;
     try{
@@ -98,7 +97,7 @@ const Footer = () => {
   return(
     <View style={localStyles.footer}>
       <HideWithKeyboard style={localStyles.footerButtons}>
-        <TouchableOpacity style={{flex:1,marginBottom: 10,justifyContent: "center"}}>
+        <TouchableOpacity onPress={() => alert("Nenhuma funcionalidade até o momento :(")}style={{flex:1,marginBottom: 10,justifyContent: "center"}}>
           <Text style={{}}>Esqueci minha senha</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigate("Register")} style={{flex:1}}>

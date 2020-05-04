@@ -18,14 +18,21 @@ const Home = () => {
 }
 
 function Main(){
-	let path = "../../../assets/images/"
+	let peoplePath = "../../../assets/images/people/"
+	let topicsPath = "../../../assets/images/topics/"
+
 	const [peopleQuestions,setPeopleQuestions] = useState([
-		{id: "0",imgData: require(path + "person.png"),name: "William",message:"Oh my dear! I am not so young anymore"},
-		{id: "1",imgData: require(path + "person.png"),name: "Matt",message:"I like glasses, glasses are cool"},
-		{id: "2",imgData: require(path + "person.png"),name: "Peter",message:"Four and a half billion? Easy peasy"},
-		{id: "3",imgData: require(path + "person.png"),name: "TheOtherPeter",message:"Look at these eyebrows"},
-		{id: "4",imgData: require(path + "person.png"),name: "Jodie", message:"Always have HOPE !!!"}
+		{id: "0",imgData: require(peoplePath + "dd.jpg"),name: "Diego",message:"Alguém conhece uma montadora de propulsores boa?"},
+		{id: "1",imgData: require(peoplePath + "jw.jpg"),name: "Jodie",message:"Preciso de uma ajuda com contadores"},
+		{id: "2",imgData: require(peoplePath + "kq.jpg"),name: "Kelvin",message:"Quais estratégias vocês tão usando para aumentar..."},
+		{id: "3",imgData: require(peoplePath + "vg.jpg"),name: "Victor",message:"Troco serviços de consultoria por serviços de design"}
 	]);
+
+	let Topics = [
+		{id:1,source: require(topicsPath + "attendance.png"),topicName: "VENDAS"},
+		{id:2,source: require(topicsPath + "marketing.jpg"),topicName: "ATENDIMENTO"},
+		{id:3,source: require(topicsPath + "sells.png"),topicName: "MARKETING"},
+	]
 
 	useEffect(()=>{
 		async function get(){
@@ -43,20 +50,8 @@ function Main(){
 	})
 	function handlePublishDoubt(){
 		alert("Nenhuma funcionalidade até o momento :(")
-	}
-	
-	let questions = [
-		{id: "0",source: require(path + "person.png"),name: "William",message:"Oh my dear! I am not so young anymore"},
-		{id: "1",source: require(path + "person.png"),name: "Matt",message:"I like glasses, glasses are cool"},
-		{id: "2",source: require(path + "person.png"),name: "Peter",message:"Four and a half billion? Easy peasy"},
-		{id: "3",source: require(path + "person.png"),name: "TheOtherPeter",message:"Look at these eyebrows"},
-		{id: "4",source: require(path + "person.png"),name: "Jodie", message:"Always have HOPE !!!"}];
+	}	
 
-	let Topics = [
-		{id:1,source: require(path + "person.png"),topicName: "VENDAS"},
-		{id:2,source: require(path + "person.png"),topicName: "ATENDIMENTO"},
-		{id:3,source: require(path + "person.png"),topicName: "MARKETING"},
-	]
 	return(
 		<View style={globalStyles.main}>
 			<View style={styles.search}>
@@ -101,7 +96,7 @@ function Main(){
 					keyExtractor={item => String(item.id)}
 					renderItem={({item}) => (
 						<View style={styles.person}>
-							<Image source={item.imgData} style={{width: 30,height: 30}}/>
+							<Image source={item.imgData} style={{width: 30,height: 30,borderRadius: 100}}/>
 							<View style={{paddingLeft: 10}}>
 								<Text>{item.name}</Text>
 								<Text>{item.message}</Text>

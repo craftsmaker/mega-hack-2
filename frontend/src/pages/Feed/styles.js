@@ -48,6 +48,6 @@ export default StyleSheet.create({
 		shadowRadius: 1.41,
 		elevation: 2,
 		backgroundColor: "#FFFFFF",
-		margin: 10,
+		margin: 5,
 	}
 })

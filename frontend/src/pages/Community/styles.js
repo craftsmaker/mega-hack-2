@@ -22,21 +22,23 @@ export default StyleSheet.create({
 		borderTopWidth: 1,
 	},
 	publicationImg:{
-		flex:0.4,
+		flex:0.30,
 		justifyContent: "center",
 	},
 	publicationText:{
-		flex:1.6,
+		flex:2,
+		paddingLeft: 10
 	},
 	waitingAnswer:{
-		flex:0.2,
+		flex:0.4,
 		flexBasis: 100
 	},
 	img:{
-		width: 60,
-		height: 30
+		width: "100%",
+		height: "100%",
+		borderRadius: 100
 	},
 	text:{
-		fontSize: 11
+		fontSize: 14
 	}
 })
