@@ -18,7 +18,7 @@ const Feed = () => {
 
 function Main(){
 	let peoplePath = "../../../assets/images/people/"
-
+	const [userImg,setUserImg] = useState(require("../../../assets/images/people/jw.jpg"))
 	const [peoplePublications,setPeoplePublications] = useState([
 		{id: "0",imgData: require(peoplePath + "dd.jpg"),name: "Diego",message:"Alguém conhece uma montadora de propulsores boa?"},
 		{id: "1",imgData: require(peoplePath + "jw.jpg"),name: "Jodie",message:"Preciso de uma ajuda com contadores"},
@@ -32,8 +32,9 @@ function Main(){
 			// onde 1 é o id do usuário
 			// e msg é a variável usada na resposta contendo as publicações
 			try{
-				const {data: {msg}} = await api.get("user/1")
-				setPeoplePublications([msg])
+				const {data: {publications,img}} = await api.get("user/1/publications")
+				setPeoplePublications([publications])
+				setUserImg(img)
 			}catch(_){
 
 			}
@@ -45,7 +46,7 @@ function Main(){
 			<View style={styles.publishForm}>
 				<View style={styles.inputSelection}>
 					<View style={{flex:0.9,marginRight: 20}}>
-						<Image source={require("../../../assets/images/people/jw.jpg")} style={{width: "100%",height: "100%",borderRadius: 100}}/>
+						<Image source={userImg} style={{width: "100%",height: "100%",borderRadius: 100}}/>
 					</View>
 					<View style={{flex:4, borderWidth:1,borderColor: "#C4C4C4"}}>
 						<TextInput

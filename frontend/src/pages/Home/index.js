@@ -18,8 +18,6 @@ const Home = () => {
 }
 
 function Main(){
-	const {params} = useRoute();
-	console.log("Home:",params);
 	let peoplePath = "../../../assets/images/people/"
 	let topicsPath = "../../../assets/images/topics/"
 
