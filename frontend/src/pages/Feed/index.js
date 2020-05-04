@@ -1,7 +1,8 @@
 import React,{useState,useEffect} from "react";
 import {View,Text,TextInput,Image,TouchableOpacity,FlatList} from "react-native";
+import {useRoute} from "@react-navigation/native";
 import styles from "./styles.js";
-import globalStyles from "../../global.js"
+import globalStyles,{defaultAccountsInfo} from "../../global.js"
 import api from "../../services/api";
 
 import Footer from "../../components/Footer";
@@ -18,7 +19,8 @@ const Feed = () => {
 
 function Main(){
 	let peoplePath = "../../../assets/images/people/"
-	const [userImg,setUserImg] = useState(require("../../../assets/images/people/jw.jpg"))
+	const {params: {id}} = useRoute();
+	const [userImg,setUserImg] = useState(defaultAccountsInfo[String(id)].imgData)
 	const [peoplePublications,setPeoplePublications] = useState([
 		{id: "0",imgData: require(peoplePath + "dd.jpg"),name: "Diego",message:"Alguém conhece uma montadora de propulsores boa?"},
 		{id: "1",imgData: require(peoplePath + "jw.jpg"),name: "Jodie",message:"Preciso de uma ajuda com contadores"},

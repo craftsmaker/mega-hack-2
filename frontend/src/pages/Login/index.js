@@ -54,7 +54,18 @@ function Main(){
         alert("O nome de usuário ou senha estão errados!")
       }
     }catch(_){
-      navigate("Drawer", {screen: "Home",params:{id:1,email: email, password: password}});
+      let id = 1;
+      switch(email){
+        case "Jodie":
+          break;
+        case "Diego":
+          id = 2
+          break;
+        case "Victor":
+          id = 3
+          break;
+      }
+      navigate("Drawer", {screen: "Home",params:{id:id,email: email, password: password}});
     }
 
     

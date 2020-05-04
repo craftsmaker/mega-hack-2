@@ -4,9 +4,8 @@ import {useRoute} from "@react-navigation/native";
 import Header from "../../components/Header"
 import Footer from "../../components/Footer"
 import styles from "./styles";
-import globalStyles from "../../global";
+import globalStyles,{defaultAccountsInfo} from "../../global";
 import api from "../../services/api.js";
-import defaultAccountsInfo from "../../services/data.json";
 
 
 const Profile = () => {
@@ -24,10 +23,10 @@ function Main(){
 
 	const [userInfo,setUserInfo] = useState({
 		name: defaultAccountsInfo[String(id)].name,
-		img:require("../../../assets/images/people/jw.jpg"),
+		img:defaultAccountsInfo[String(id)].imgData,
 		text: "Lets get it started",
-		following: "79",
-		followed: "8.439"
+		following: defaultAccountsInfo[String(id)].following,
+		followed: defaultAccountsInfo[String(id)].beingFollowedBy
 	});
 	function handleProfile(){
 		alert("Nenhuma funcionalidade até o momento :(")

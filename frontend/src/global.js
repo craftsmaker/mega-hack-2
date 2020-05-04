@@ -59,3 +59,24 @@ export default StyleSheet.create({
       marginTop: 20
     }
 })
+
+export const defaultAccountsInfo = {
+  "1": {
+    name: "Jodie Whittaker",
+    imgData: require("../assets/images/people/jw.jpg"),
+    following: "79",
+    beingFollowedBy: "8.439"
+  },
+  "2": {
+    name: "Diego Deschamps",
+    imgData: require("../assets/images/people/dd.jpg"),
+    following: "10",
+    beingFollowedBy: "1000"
+  },
+  "3": {
+    name: "Victor Guedes",
+    imgData: require("../assets/images/people/vg.jpg"),
+    following: "100",
+    beingFollowedBy: "0"
+  }
+}
