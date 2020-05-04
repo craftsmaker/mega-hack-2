@@ -18,11 +18,12 @@ export default StyleSheet.create({
 		flex:1,
 		flexDirection: "row",
 		padding: 5,
+		height: 60,
 		borderColor: "#C4C4C4",
 		borderTopWidth: 1,
 	},
 	publicationImg:{
-		flex:0.30,
+		flex:0.4,
 		justifyContent: "center",
 	},
 	publicationText:{
@@ -39,6 +40,6 @@ export default StyleSheet.create({
 		borderRadius: 100
 	},
 	text:{
-		fontSize: 14
+		fontSize: 13
 	}
 })

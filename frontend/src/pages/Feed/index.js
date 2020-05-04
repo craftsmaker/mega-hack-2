@@ -1,7 +1,8 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import {View,Text,TextInput,Image,TouchableOpacity,FlatList} from "react-native";
 import styles from "./styles.js";
 import globalStyles from "../../global.js"
+import api from "../../services/api";
 
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -24,8 +25,22 @@ function Main(){
 		{id: "2",imgData: require(peoplePath + "kq.jpg"),name: "Kelvin",message:"Quais estratégias vocês tão usando para aumentar..."},
 		{id: "3",imgData: require(peoplePath + "vg.jpg"),name: "Victor",message:"Troco serviços de consultoria por serviços de design"}
 	]);
-	return(
-		
+
+
+	useEffect(() => {
+		async function getData(){
+			// onde 1 é o id do usuário
+			// e msg é a variável usada na resposta contendo as publicações
+			try{
+				const {data: {msg}} = await api.get("user/1")
+				setPeoplePublications([msg])
+			}catch(_){
+
+			}
+		}
+		getData()
+	})
+	return(		
 		<View style={globalStyles.main}>
 			<View style={styles.publishForm}>
 				<View style={styles.inputSelection}>
@@ -66,7 +81,7 @@ function Main(){
 									<Text style={{flex:4, paddingLeft:10}}>Alex 12:12 - 12/12/2012</Text>
 								</View>
 								<View style={{flex:1, paddingTop: 10}}>
-									<Text>Hope is the best weapon against'em all</Text>
+									<Text>{item.message}</Text>
 								</View>
 							</View>
 						)}

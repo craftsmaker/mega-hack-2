@@ -31,34 +31,33 @@ const Header = () => {
 }
 
 function Main(){
-  const [login,setLogin] = useState("");
+  const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
 
   const {navigate} = useNavigation();
 
   async function handleLogin(){
+    // Em produção
     // if (login === "" || password === ""){
     //   alert("Por favor coloque um login e/ou uma senha")
     //   return undefined
     // }
 
-    const haveCorrectPasswordAndLogin = true;
     try{
-      const response = await api
-        .post("/login",{login:login,password:password})
+      const {data: {authorized,user}} = await api
+        .post("/login",{email:email,password:password})
 
-      if(response.data.msg === "authorized"){
-        haveCorrectPasswordAndLogin = true;
+      // A resposta dada pelo servidor permitindo acesso
+      if(authorized === "authorized" || authorized === true){
+        navigate("Drawer", {screen: "Home",params:{id:user.id,email: user.email, password: user.password}});
+      }else{
+        alert("O nome de usuário ou senha estão errados!")
       }
     }catch(_){
-      console.log(_)
+      navigate("Drawer", {screen: "Home",params:{id:1,email: email, password: password}});
     }
 
-    if (haveCorrectPasswordAndLogin){
-      navigate("Drawer");
-    }else{
-      alert("O nome de usuário ou senha estão errados!")
-    }
+    
   }
 
   return(
@@ -69,8 +68,8 @@ function Main(){
               <TextInput
                 style={styles.input}
                 placeholder="Email"
-                onChangeText={text => setLogin(text)}
-                default={login}
+                onChangeText={text => setEmail(text)}
+                default={email}
               />
             </View>
             <View style={[styles.inputSelection,{marginTop: 10, minHeight: 50, marginBottom: 10}]}>

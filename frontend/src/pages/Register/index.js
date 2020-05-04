@@ -47,7 +47,7 @@ function Main(){
 				const response = await api
 					.post("/register",{name:name,surname:surname,email:email,phone:phone,password:password})
 			}catch(_){
-				console.log(_)
+				
 			}
 		}else{
 			alert("Por favor, coloque no minímo nome, email e senha")

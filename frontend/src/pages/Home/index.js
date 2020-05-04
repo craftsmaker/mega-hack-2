@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {View,Text,TextInput,TouchableOpacity,FlatList,ImageBackground, Image} from "react-native";
-import {useNavigation} from "@react-navigation/native";
+import {useNavigation,useRoute} from "@react-navigation/native";
 import styles from "./styles.js"
 import globalStyles from "../../global.js"
 import Header from "../../components/Header";
@@ -18,6 +18,8 @@ const Home = () => {
 }
 
 function Main(){
+	const {params} = useRoute();
+	console.log("Home:",params);
 	let peoplePath = "../../../assets/images/people/"
 	let topicsPath = "../../../assets/images/topics/"
 
@@ -37,12 +39,14 @@ function Main(){
 	useEffect(()=>{
 		async function get(){
 			 try{
+			 	// msg é um 'placeholder' para o identificador da variável com a lista de publicações
+			 	// aonde cada índice tem um conjunto de variáveis
 			 	const {data: {msg}} = await api.get("/home");
 			 	if (msg !== ""){
 			 		setPeopleQuestions([msg])
 			 	}
 			 }catch(_){
-			 	console.log(_)
+			 	
 			 }			 
 		}
 		
