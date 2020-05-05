@@ -23,7 +23,7 @@ const accounts = [
   {
   	id: "4",
   	name: "Kelvin Queiroz",
-  	imgData: require("../../assets/images/people/vg.jpg"),
+  	imgData: require("../../assets/images/people/kq.jpg"),
   	following: "100",
     beingFollowedBy: "0"
   }
@@ -51,7 +51,7 @@ const community = [
 	{
 		id: "4",
     name: "Kelvin Queiroz",
-    imgData: require("../../assets/images/people/vg.jpg"),
+    imgData: require("../../assets/images/people/kq.jpg"),
 		message:"Troco serviços de consultoria por serviços de design"
 	}
 ]
@@ -78,7 +78,7 @@ const feed = [
   {
     id: "4",
     name: "Kelvin Queiroz",
-    imgData: require("../../assets/images/people/vg.jpg"),
+    imgData: require("../../assets/images/people/kq.jpg"),
     message:"Troco serviços de consultoria por serviços de design"
   }
 ]
@@ -106,7 +106,7 @@ const home = [
   {
     id: "4",
     name: "Kelvin Queiroz",
-    imgData: require("../../assets/images/people/vg.jpg"),
+    imgData: require("../../assets/images/people/kq.jpg"),
     message:"Troco serviços de consultoria por serviços de design"
   }
 ]
