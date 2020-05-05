@@ -6,6 +6,7 @@ import Footer from "../../components/Footer"
 import styles from "./styles";
 import globalStyles,{defaultAccountsInfo} from "../../global";
 import api from "../../services/api.js";
+import * as constants from "../../constants";
 
 
 const Profile = () => {
@@ -21,13 +22,12 @@ const Profile = () => {
 function Main(){
 	const {params: {id}} = useRoute();
 
-	const [userInfo,setUserInfo] = useState({
-		name: defaultAccountsInfo[String(id)].name,
-		img:defaultAccountsInfo[String(id)].imgData,
-		text: "Lets get it started",
-		following: defaultAccountsInfo[String(id)].following,
-		followed: defaultAccountsInfo[String(id)].beingFollowedBy
-	});
+	const {mocks: {accounts}} = constants;
+
+	const profile = accounts[String(id - 1)]
+
+	const [userInfo,setUserInfo] = useState({});
+	
 	function handleProfile(){
 		alert("Nenhuma funcionalidade até o momento :(")
 	}
@@ -37,13 +37,13 @@ function Main(){
 			<View style={styles.profile}>
 				<View style={{flex:1.6, paddingBottom: 20}}>
 					<View style={{flex:1,padding: "5%", paddingLeft: "34%",paddingRight: "32%"}}>
-						<Image source={userInfo.img} style={{width: "100%",height: "100%",borderRadius: 100}}/>
+						<Image source={profile.imgData} style={{width: "100%",height: "100%",borderRadius: 100}}/>
 					</View>
 				</View>
 				<View style={{flex:1}}>
-					<Text style={{textAlign: "center",marginBottom: 10, fontWeight: "bold",fontSize: 18}}>{userInfo.name}</Text>
+					<Text style={{textAlign: "center",marginBottom: 10, fontWeight: "bold",fontSize: 18}}>{profile.name}</Text>
 					<Text style={{textAlign: "center",marginBottom: 10}}>“Lets get a shift on” </Text>
-					<Text style={{textAlign: "center",color: "#787878",fontSize: 12}}>Seguindo: {userInfo.following}  Seguidores: {userInfo.followed}</Text>
+					<Text style={{textAlign: "center",color: "#787878",fontSize: 12}}>Seguindo: {profile.following}  Seguidores: {profile.beingFollowedBy}</Text>
 				</View>
 				<View style={{flex:1, justifyContent: "center", alignItems: "center",paddingTop: 10}}>
 					<TouchableOpacity style={globalStyles.enterBtn} onPress={handleProfile}>

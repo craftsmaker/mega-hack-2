@@ -6,6 +6,7 @@ import globalStyles from "../../global.js"
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import api from "../../services/api";
+import * as constants from "../../constants";
 
 const Home = () => {	
 	return (
@@ -21,18 +22,9 @@ function Main(){
 	let peoplePath = "../../../assets/images/people/"
 	let topicsPath = "../../../assets/images/topics/"
 
-	const [peopleQuestions,setPeopleQuestions] = useState([
-		{id: "0",imgData: require(peoplePath + "dd.jpg"),name: "Diego",message:"Alguém conhece uma montadora de propulsores boa?"},
-		{id: "1",imgData: require(peoplePath + "jw.jpg"),name: "Jodie",message:"Preciso de uma ajuda com contadores"},
-		{id: "2",imgData: require(peoplePath + "kq.jpg"),name: "Kelvin",message:"Quais estratégias vocês tão usando para aumentar..."},
-		{id: "3",imgData: require(peoplePath + "vg.jpg"),name: "Victor",message:"Troco serviços de consultoria por serviços de design"}
-	]);
+	const {mocks: {home,topics}} = constants;
 
-	let Topics = [
-		{id:1,source: require(topicsPath + "attendance.png"),topicName: "VENDAS"},
-		{id:2,source: require(topicsPath + "marketing.jpg"),topicName: "ATENDIMENTO"},
-		{id:3,source: require(topicsPath + "sells.png"),topicName: "MARKETING"},
-	]
+	const [peopleQuestions,setPeopleQuestions] = useState([{}]);
 
 	useEffect(()=>{
 		async function get(){
@@ -70,13 +62,13 @@ function Main(){
 					<FlatList
 						style={styles.topicsContainer}
 						horizontal={true}
-						data={Topics}
+						data={topics}
 						keyExtractor={item => String(item.id)}
 						renderItem={({item}) => (
 							<View style={styles.topic}>								
 									<ImageBackground source={item.source} style={styles.imgBackground}>
 										<View style={{flex:1,backgroundColor: "rgba(0,0,0,0.4)", width: "100%",justifyContent: "center"}}>
-											<Text style={{color: "white",textAlign: "center"}}>{item.topicName}</Text>
+											<Text style={{color: "white",textAlign: "center"}}>{item.title}</Text>
 										</View>
 									</ImageBackground>
 							</View>
@@ -94,7 +86,7 @@ function Main(){
 				<Text>Perguntas recentes</Text>
 				<FlatList
 					style={styles.questionsAsked}
-					data={peopleQuestions}
+					data={home}
 					keyExtractor={item => String(item.id)}
 					renderItem={({item}) => (
 						<View style={styles.person}>

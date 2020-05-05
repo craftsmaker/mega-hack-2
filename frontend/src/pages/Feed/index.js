@@ -4,6 +4,7 @@ import {useRoute} from "@react-navigation/native";
 import styles from "./styles.js";
 import globalStyles,{defaultAccountsInfo} from "../../global.js"
 import api from "../../services/api";
+import * as constants from "../../constants";
 
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -20,14 +21,9 @@ const Feed = () => {
 function Main(){
 	let peoplePath = "../../../assets/images/people/"
 	const {params: {id}} = useRoute();
-	const [userImg,setUserImg] = useState(defaultAccountsInfo[String(id)].imgData)
-	const [peoplePublications,setPeoplePublications] = useState([
-		{id: "0",imgData: require(peoplePath + "dd.jpg"),name: "Diego",message:"Alguém conhece uma montadora de propulsores boa?"},
-		{id: "1",imgData: require(peoplePath + "jw.jpg"),name: "Jodie",message:"Preciso de uma ajuda com contadores"},
-		{id: "2",imgData: require(peoplePath + "kq.jpg"),name: "Kelvin",message:"Quais estratégias vocês tão usando para aumentar..."},
-		{id: "3",imgData: require(peoplePath + "vg.jpg"),name: "Victor",message:"Troco serviços de consultoria por serviços de design"}
-	]);
-
+	const {mocks: {accounts,feed}} = constants;
+	const [userImg,setUserImg] = useState(accounts[String(id - 1)].imgData)
+	const [peoplePublications,setPeoplePublications] = useState([]);
 
 	useEffect(() => {
 		async function getData(){
@@ -73,7 +69,7 @@ function Main(){
 				</View>
 				<View style={styles.publications}>
 					<FlatList
-						data={peoplePublications}
+						data={feed}
 						keyExtractor={n => String(n.id)}
 						renderItem={({item}) => (
 							<View style={styles.personPublication}>
