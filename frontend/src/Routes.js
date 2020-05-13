@@ -3,6 +3,8 @@ import {View,Text} from "react-native";
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 import {createDrawerNavigator} from "@react-navigation/drawer";
+import {Provider} from "react-redux";
+import store from "./store";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register"
@@ -16,13 +18,15 @@ const Stack = createStackNavigator();
 
 const Routes = () => {
 	return(
-		<NavigationContainer>
-			<Stack.Navigator headerMode="none">
-				<Stack.Screen name="Login" component={Login}/>
-				<Stack.Screen name="Register" component={Register}/>
-				<Stack.Screen name="Drawer" component={DrawerNavigator}/>
-			</Stack.Navigator>
-		</NavigationContainer>
+		<Provider store={store}>
+			<NavigationContainer>
+				<Stack.Navigator headerMode="none">
+					<Stack.Screen name="Login" component={Login}/>
+					<Stack.Screen name="Register" component={Register}/>
+					<Stack.Screen name="Drawer" component={DrawerNavigator}/>
+				</Stack.Navigator>
+			</NavigationContainer>
+		</Provider>
 	)
 }
 

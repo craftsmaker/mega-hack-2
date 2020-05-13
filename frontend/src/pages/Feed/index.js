@@ -1,29 +1,48 @@
-import React,{useState,useEffect} from "react";
-import {View,Text,TextInput,Image,TouchableOpacity,FlatList} from "react-native";
-import {useRoute} from "@react-navigation/native";
+import React,{useState,useEffect,useLayoutEffect} from "react";
+import {View,Text,TextInput,Image,TouchableOpacity,FlatList,Animated} from "react-native";
+import {useRoute,useNavigation,CommonActions} from "@react-navigation/native";
 import styles from "./styles.js";
 import globalStyles,{defaultAccountsInfo} from "../../global.js"
 import api from "../../services/api";
 import * as constants from "../../constants";
+import {connect} from "react-redux";
 
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-const Feed = () => {
+const Feed = ({storedValues}) => {
+	const [screenPosition,setScreenPosition] = useState(new Animated.ValueXY({x: 350,y: 0}))
 	return(
 		<View style={globalStyles.container}>
 			<Header/>
-			<Main/>
-			<Footer/>
+			<Main storedValues={storedValues} screenPosition={screenPosition}/>
+			<Footer screenPosition={screenPosition}/>
 		</View>
 	)
 }
 
-function Main(){
-	let peoplePath = "../../../assets/images/people/"
+function Main({storedValues,screenPosition}){
 	const {params: {id}} = useRoute();
 	const {mocks: {accounts,feed}} = constants;
 	const [userImg,setUserImg] = useState(accounts[String(id - 1)].imgData)
-	const [peoplePublications,setPeoplePublications] = useState([]);
+	const [peoplePublications,setPeoplePublications] = useState(feed);
+	
+
+	const {params} = useRoute();
+	const {dispatch} = useNavigation();
+
+	useLayoutEffect(() => {
+		if (params?.animate){
+			screenPosition.setValue({x: -params.moveX, y: 0})
+			Animated.timing(screenPosition, {
+				toValue: {
+					x: 0,
+					y: 0
+				},
+				duration: 800,
+				useNativeDriver: true
+			}).start(() => dispatch(CommonActions.setParams({animate: undefined})))
+		}
+	})
 
 	useEffect(() => {
 		async function getData(){
@@ -39,8 +58,9 @@ function Main(){
 		}
 		getData()
 	})
+
 	return(		
-		<View style={globalStyles.main}>
+		<Animated.View style={[{transform: [{translateX: screenPosition.x}]},globalStyles.main]}>
 			<View style={styles.publishForm}>
 				<View style={styles.inputSelection}>
 					<View style={{flex:0.9,marginRight: 20}}>
@@ -69,7 +89,7 @@ function Main(){
 				</View>
 				<View style={styles.publications}>
 					<FlatList
-						data={feed}
+						data={peoplePublications}
 						keyExtractor={n => String(n.id)}
 						renderItem={({item}) => (
 							<View style={styles.personPublication}>
@@ -87,9 +107,11 @@ function Main(){
 					/>
 				</View>
 			</View>
-		</View>
+		</Animated.View>
 	)
 }
 
 
-export default Feed;
+export default connect(state => ({
+	storedValues: state
+}))(Feed);

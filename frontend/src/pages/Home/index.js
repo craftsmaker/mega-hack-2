@@ -1,53 +1,67 @@
-import React,{useEffect,useState} from "react";
-import {View,Text,TextInput,TouchableOpacity,FlatList,ImageBackground, Image} from "react-native";
-import {useNavigation,useRoute} from "@react-navigation/native";
+import React,{useEffect,useState,useLayoutEffect,InteractionManager } from "react";
+import {
+	View,
+	Text,
+	TextInput,
+	TouchableOpacity,
+	FlatList,
+	ImageBackground,
+	Image,
+	useWindowDimensions,
+	Animated
+} from "react-native";
+import { useRoute, useNavigation, CommonActions } from '@react-navigation/native';
 import styles from "./styles.js"
 import globalStyles from "../../global.js"
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import api from "../../services/api";
 import * as constants from "../../constants";
+import {connect,useStore} from "react-redux";
 
-const Home = () => {	
+const Home = ({storedValues,dispatch}) => {
+	const [screenPosition,setScreenPosition] = useState(new Animated.ValueXY({x: 0,y: 0}))
 	return (
 		<View style={[globalStyles.container, styles.container]}>
 			<Header/>
-			<Main/>
-			<Footer/>
+			<Main screenPosition={screenPosition}/>
+			<Footer screenPosition={screenPosition} actualScreen="Home"/>
 		</View>
 	)
 }
 
-function Main(){
-	let peoplePath = "../../../assets/images/people/"
-	let topicsPath = "../../../assets/images/topics/"
+function Main({screenPosition}){
+	
 
 	const {mocks: {home,topics}} = constants;
 
-	const [peopleQuestions,setPeopleQuestions] = useState([{}]);
+	const [peopleQuestions,setPeopleQuestions] = useState(home);
 
-	useEffect(()=>{
-		async function get(){
-			 try{
-			 	// msg é um 'placeholder' para o identificador da variável com a lista de publicações
-			 	// aonde cada índice tem um conjunto de variáveis
-			 	const {data: {msg}} = await api.get("/home");
-			 	if (msg !== ""){
-			 		setPeopleQuestions([msg])
-			 	}
-			 }catch(_){
-			 	
-			 }			 
+	// // Animations
+	const {params} = useRoute()
+	const {dispatch} = useNavigation();
+
+	useLayoutEffect(() => {
+		if (params?.animate){
+			screenPosition.setValue({x: -params.moveX, y: 0});
+			Animated.timing(screenPosition, {
+				toValue: {
+					x: 0,
+					y: 0,
+				},
+				duration: 800,
+				useNativeDriver: true
+			}).start(() => dispatch(CommonActions.setParams({animate: undefined})))
 		}
-		
-		get();
 	})
+
+	
 	function handlePublishDoubt(){
 		alert("Nenhuma funcionalidade até o momento :(")
 	}	
 
 	return(
-		<View style={globalStyles.main}>
+		<Animated.View style={[{transform: [{translateX: screenPosition.x}]},globalStyles.main]}>
 			<View style={styles.search}>
 				<View style={{flex:1,flexBasis: 30}}>
 					<Text style={styles.searchTitle}>Veja o que está acontecendo na comunidade</Text>
@@ -65,7 +79,7 @@ function Main(){
 						data={topics}
 						keyExtractor={item => String(item.id)}
 						renderItem={({item}) => (
-							<View style={styles.topic}>								
+							<View style={styles.topic}>
 									<ImageBackground source={item.source} style={styles.imgBackground}>
 										<View style={{flex:1,backgroundColor: "rgba(0,0,0,0.4)", width: "100%",justifyContent: "center"}}>
 											<Text style={{color: "white",textAlign: "center"}}>{item.title}</Text>
@@ -86,7 +100,7 @@ function Main(){
 				<Text>Perguntas recentes</Text>
 				<FlatList
 					style={styles.questionsAsked}
-					data={home}
+					data={peopleQuestions}
 					keyExtractor={item => String(item.id)}
 					renderItem={({item}) => (
 						<View style={styles.person}>
@@ -100,8 +114,10 @@ function Main(){
 
 				/>
 			</View>
-		</View>
+		</Animated.View>
 	)
 }
 
-export default Home;
+export default connect(state => ({
+	storedValues: state
+}))(Home);

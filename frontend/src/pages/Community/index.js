@@ -1,28 +1,53 @@
-import React,{useState,useEffect} from "react";
-import {View,Text,Image,TextInput,TouchableOpacity,FlatList} from "react-native";
+import React,{useState,useEffect,useLayoutEffect} from "react";
+import {View,Text,Image,TextInput,TouchableOpacity,FlatList,Animated} from "react-native";
+import {useRoute,useNavigation,CommonActions} from "@react-navigation/native";
 import styles from "./styles";
 import globalStyles from "../../global";
 import * as constants from "../../constants";
-
+import {useStore} from "react-redux";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
-const Community = () => {
+const Community = ({storedValues}) => {
+	const [screenPosition,setScreenPosition] = useState(new Animated.ValueXY({x: 0, y: 0}));
 	return(
 		<View style={globalStyles.container}>
 			<Header/>
-			<Main/>
-			<Footer/>
+			<Main screenPosition={screenPosition}/>
+			<Footer screenPosition={screenPosition}/>
 		</View>
 	)
 }
 
-function Main(){
+function Main({screenPosition}){
+	
+
 	const {mocks: {community}} = constants;
 	// formato dos dados, caso a imagem seja uma string base 64 ou link usar usar:
 	// imgData: {uri: "string base 64"} no formato 
 	// string Base 64 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
-	const [peoplePublications,setPeoplePublications] = useState([]);
+	const [peoplePublications,setPeoplePublications] = useState(community);
+	
+	const {params} = useRoute();
+	const {navigate,dispatch} = useNavigation();
+
+	console.log(params);
+
+	const {getState} = useStore();
+	
+	useLayoutEffect(() => {
+		if (params?.animate){
+			screenPosition.setValue({x: -params.moveX, y: 0})
+			Animated.timing(screenPosition, {
+				toValue: {
+					x: 0,
+					y: 0
+				},
+				duration: 800,
+				useNativeDriver: true
+			}).start(() => dispatch(CommonActions.setParams({animate: undefined})))
+		}
+	})
 
 	useEffect(() => {
 		async function getData(){
@@ -37,14 +62,18 @@ function Main(){
 		getData()
 	})
 
+	
+
 	function handlePublish(){
 		alert("Nenhuma funcionalidade até o momento :(")
 	}
 	function handleSelectTopic(){
 		alert("Nenhuma funcionalidade até o momento :(")
 	}
+
+
 	return(
-		<View style={globalStyles.main}>
+		<Animated.View style={[{transform: [{translateX: screenPosition.x}]},globalStyles.main]}>
 			<View style={styles.publishForm}>
 				<View style={styles.publishInput}>
 					<TextInput
@@ -65,7 +94,7 @@ function Main(){
 
 			<View style={{flex:0.25, flexBasis: 135}}>
 				<FlatList
-					data={community}
+					data={peoplePublications}
 					keyExtractor={n => String(n.id)}
 					renderItem={({item}) => (
 						<View style={styles.personPublication}>
@@ -89,7 +118,7 @@ function Main(){
 				<Text style={{padding: 5, backgroundColor: "#F7F7F7"}}>Tópicos aguardando respostas</Text>
 				<View style={{flex:1}}>
 					<FlatList
-						data={community}
+						data={peoplePublications}
 						keyExtractor={n => String(n.id)}
 						renderItem={({item}) => (
 							<View style={styles.personPublication}>
@@ -110,7 +139,7 @@ function Main(){
 				</View>
 			</View>
 			<View style={{flex:0.3,backgroundColor: "#F7F7F7"}}/>
-		</View>
+		</Animated.View>
 	)
 }
 

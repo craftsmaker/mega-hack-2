@@ -49,7 +49,7 @@ function Main(){
 
       // A resposta dada pelo servidor permitindo acesso
       if(authorized === "authorized" || authorized === true){
-        navigate("Drawer", {screen: "Home",params:{id:user.id,email: user.email, password: user.password}});
+        navigate("Drawer", {screen: "Home",params:{id:user.id,email: user.email, password: user.password, animate: undefined}});
       }else{
         alert("O nome de usuário ou senha estão errados!")
       }
@@ -65,7 +65,7 @@ function Main(){
           id = 3
           break;
       }
-      navigate("Drawer", {screen: "Home",params:{id:id,email: email, password: password}});
+      navigate("Drawer", {screen: "Home",params:{id:id,email: email, password: password, animate: undefined}});
     }
 
     

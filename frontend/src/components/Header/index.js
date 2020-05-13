@@ -4,8 +4,9 @@ import {useNavigation} from "@react-navigation/native";
 import {Feather} from "@expo/vector-icons";
 import styles from "./styles.js"
 
-const Header = (props) => {
+const Header = ({storedValues}) => {
 	const {openDrawer} = useNavigation();
+	
 	return(
 		<View style={styles.header}>
 			<View style={[styles.btn, {flex: 0.3}]}>
