@@ -5,22 +5,21 @@ import styles from "./styles.js";
 import globalStyles,{defaultAccountsInfo} from "../../global.js"
 import api from "../../services/api";
 import * as constants from "../../constants";
-import {connect} from "react-redux";
 
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-const Feed = ({storedValues}) => {
+const Feed = () => {
 	const [screenPosition,setScreenPosition] = useState(new Animated.ValueXY({x: 350,y: 0}))
 	return(
 		<View style={globalStyles.container}>
 			<Header/>
-			<Main storedValues={storedValues} screenPosition={screenPosition}/>
+			<Main screenPosition={screenPosition}/>
 			<Footer screenPosition={screenPosition}/>
 		</View>
 	)
 }
 
-function Main({storedValues,screenPosition}){
+function Main({screenPosition}){
 	const {params: {id}} = useRoute();
 	const {mocks: {accounts,feed}} = constants;
 	const [userImg,setUserImg] = useState(accounts[String(id - 1)].imgData)
@@ -38,7 +37,7 @@ function Main({storedValues,screenPosition}){
 					x: 0,
 					y: 0
 				},
-				duration: 800,
+				duration: params.duration,
 				useNativeDriver: true
 			}).start(() => dispatch(CommonActions.setParams({animate: undefined})))
 		}
@@ -66,11 +65,11 @@ function Main({storedValues,screenPosition}){
 					<View style={{flex:0.9,marginRight: 20}}>
 						<Image source={userImg} style={{width: "100%",height: "100%",borderRadius: 100}}/>
 					</View>
-					<View style={{flex:4, borderWidth:1,borderColor: "#C4C4C4"}}>
+					<View style={{flex:4}}>
 						<TextInput
+							style={{borderWidth:2,borderColor: "#C4C4C4",borderRadius: 3,padding: 5,textAlignVertical: "top",paddingLeft: 10}}
 							placeholder="Compartilhe algo com seus seguidores :)"
 							multiline={true} 
-							style={{height: "100%",paddingLeft: 10}}
 						/>
 					</View>
 				</View>
@@ -112,6 +111,4 @@ function Main({storedValues,screenPosition}){
 }
 
 
-export default connect(state => ({
-	storedValues: state
-}))(Feed);
+export default Feed;

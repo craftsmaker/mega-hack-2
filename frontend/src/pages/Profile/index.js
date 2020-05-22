@@ -38,7 +38,7 @@ function Main({screenPosition}){
 					x:0,
 					y:0
 				},
-				duration: 800,
+				duration: params.duration,
 				useNativeDriver: true
 			}).start(() => dispatch(CommonActions.setParams({animate: undefined})))
 		}

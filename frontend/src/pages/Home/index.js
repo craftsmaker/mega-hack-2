@@ -19,13 +19,13 @@ import api from "../../services/api";
 import * as constants from "../../constants";
 import {connect,useStore} from "react-redux";
 
-const Home = ({storedValues,dispatch}) => {
+const Home = () => {
 	const [screenPosition,setScreenPosition] = useState(new Animated.ValueXY({x: 0,y: 0}))
 	return (
 		<View style={[globalStyles.container, styles.container]}>
 			<Header/>
 			<Main screenPosition={screenPosition}/>
-			<Footer screenPosition={screenPosition} actualScreen="Home"/>
+			<Footer screenPosition={screenPosition}/>
 		</View>
 	)
 }
@@ -49,7 +49,7 @@ function Main({screenPosition}){
 					x: 0,
 					y: 0,
 				},
-				duration: 800,
+				duration: params.duration,
 				useNativeDriver: true
 			}).start(() => dispatch(CommonActions.setParams({animate: undefined})))
 		}
@@ -118,6 +118,4 @@ function Main({screenPosition}){
 	)
 }
 
-export default connect(state => ({
-	storedValues: state
-}))(Home);
+export default Home;

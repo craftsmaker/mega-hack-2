@@ -8,7 +8,7 @@ import {useStore} from "react-redux";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
-const Community = ({storedValues}) => {
+const Community = () => {
 	const [screenPosition,setScreenPosition] = useState(new Animated.ValueXY({x: 0, y: 0}));
 	return(
 		<View style={globalStyles.container}>
@@ -43,7 +43,7 @@ function Main({screenPosition}){
 					x: 0,
 					y: 0
 				},
-				duration: 800,
+				duration: params.duration,
 				useNativeDriver: true
 			}).start(() => dispatch(CommonActions.setParams({animate: undefined})))
 		}
@@ -77,7 +77,7 @@ function Main({screenPosition}){
 			<View style={styles.publishForm}>
 				<View style={styles.publishInput}>
 					<TextInput
-						style={{borderWidth: 1,borderColor: "#C4C4C4",borderRadius: 3,padding: 5}}
+						style={{borderWidth: 1,borderColor: "#C4C4C4",borderRadius: 3,padding: 5,textAlignVertical: "top"}}
 						multiline={true}
 						placeholder="Crie uma nova publicação contando uma experiência nos negócios ou faça uma pergunta para à comunidade"
 					/>

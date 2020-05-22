@@ -7,11 +7,13 @@ import {useNavigation,useRoute} from "@react-navigation/native";
 import {connect} from "react-redux";
 
 const Footer = ({storedValues,dispatch,actualScreen, screenPosition}) => {
+	const transitionDuration = 800;
 	const {navigate} = useNavigation();
 	// const {params: {id,email,password}} = useRoute();
 	const {params: {index}} = useRoute();
 	
 	const goToOtherScreen = (place,screenToGoIndex) => {
+
 		let moveX = -350;
 		if (index > screenToGoIndex){
 			moveX = 350;
@@ -21,9 +23,9 @@ const Footer = ({storedValues,dispatch,actualScreen, screenPosition}) => {
 				x: moveX,
 				y: 0
 			},
-			duration: 800,
+			duration: transitionDuration,
 			useNativeDriver: true
-		}).start(() => navigate(place, {id:1,animate: "teste",index:screenToGoIndex,moveX: moveX}))
+		}).start(() => navigate(place, {id:1,animate: "teste",index:screenToGoIndex,moveX: moveX,duration:transitionDuration}))
 	}
 
 	function goToHome(){
